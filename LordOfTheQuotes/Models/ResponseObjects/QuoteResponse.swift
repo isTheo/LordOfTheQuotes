@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+struct QuoteResponse: Codable {
+    let docs: [Quote]
+    let total: Int
+    let limit: Int
+    let offset: Int
+    let page: Int
+    let pages: Int
+}
