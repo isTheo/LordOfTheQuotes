@@ -1,6 +1,6 @@
 # Xcode
 #
-# File di compilazione e cache
+# Build files and cache
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -18,21 +18,19 @@ DerivedData/
 *.dSYM.zip
 *.dSYM
 
-# File di configurazione Swift Package Manager
+# Swift Package Manager
 .build/
 Packages/
 Package.pins
-Package.resolved
-*.xcodeproj
 
-# Cartelle generate da CocoaPods
+# CocoaPods
 Pods/
 Podfile.lock
 
-# Cartelle generate da Carthage
+# Carthage
 Carthage/Build/
 
-# Cartelle specifiche di fastlane
+# fastlane
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
@@ -41,17 +39,17 @@ fastlane/test_output
 # Code Injection
 iOSInjectionProject/
 
-# File di sistema macOS
+# macOS system files
 .DS_Store
 .AppleDouble
 .LSOverride
 Icon
 ._*
 
-# File temporanei
+# Temporary files
 *.swp
 *~.nib
 *.swiftpm
 
-# Bearer
+# Sensitive data
 Config.swift
