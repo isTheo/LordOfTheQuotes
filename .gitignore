@@ -52,3 +52,6 @@ Icon
 *.swp
 *~.nib
 *.swiftpm
+
+# Bearer
+Config.swift
