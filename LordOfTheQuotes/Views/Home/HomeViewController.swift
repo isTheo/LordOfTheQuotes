@@ -41,6 +41,7 @@ class HomeViewController: UIViewController {
         setupUI()
         bindViewModel()
         viewModel.loadMovies()
+        
     }
     
     
@@ -70,7 +71,8 @@ class HomeViewController: UIViewController {
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
         ])
         
-        let fellowshipStackView = createMovieSection(title: "Fellowship of the Ring", imageName: "fellowshipButton.png")
+        
+        let fellowshipStackView = createMovieSection(title: "The Fellowship of the Ring", imageName: "fellowshipButton.png")
         let towersStackView = createMovieSection(title: "The Two Towers", imageName: "twoTowersButton.jpg")
         let kingStackView = createMovieSection(title: "The Return of the King", imageName: "returnOfTheKingButton.jpg")
         
@@ -80,8 +82,9 @@ class HomeViewController: UIViewController {
         
         infoButton = UIButton(type: .system)
         infoButton.setTitle("Info", for: .normal)
-        infoButton.backgroundColor = .lightGray
-        infoButton.setTitleColor(.black, for: .normal)
+        infoButton.backgroundColor = .black
+        infoButton.setTitleColor(.white, for: .normal)
+        infoButton.layer.opacity = 0.7
         infoButton.layer.cornerRadius = 20
         infoButton.addTarget(self, action: #selector(infoButtonTapped), for: .touchUpInside)
         view.addSubview(infoButton)
@@ -123,8 +126,11 @@ class HomeViewController: UIViewController {
         
         let titleLabel = UILabel()
         titleLabel.text = title
-        titleLabel.textColor = .black
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        titleLabel.font = UIFont.lordOfTheRings(size: 20)
+        titleLabel.textColor = .white
+        titleLabel.shadowColor = .black .withAlphaComponent(0.4)
+        titleLabel.shadowOffset = CGSize(width: 1, height: 2)
+        titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textAlignment = .center
         
         containerStack.addArrangedSubview(button)
@@ -167,11 +173,48 @@ class HomeViewController: UIViewController {
     
     // MARK: - Actions
     @objc private func movieButtonTapped(_ sender: UIButton) {
+        let movieTitle: String
+        var movieId: String
+        
+        if sender == fellowshipButton {
+            movieTitle = "Fellowship of the Ring"
+            movieId = "5cd95395de30eff6ebccde5b"
+        } else if sender == twoTowersButton {
+            movieTitle = "The Two Towers"
+            movieId = "5cd95395de30eff6ebccde5c"
+        } else {
+            movieTitle = "The Return of the King"
+            movieId = "5cd95395de30eff6ebccde5d"
+        }
+        
+        let selectedMovie = Movie (
+            id: movieId,
+            name: movieTitle,
+            //            runtimeInMinutes: nil,
+            //            budgetInMillions: nil,
+            //            boxOfficeRevenueInMillions: nil,
+            //            academyAwardNominations: nil,
+            //            academyAwardWins: nil
+        )
+        
+        
+        let apiService = APIService()
+        let charactersViewModel = CharactersViewModel(apiService: apiService, selectedMovie: selectedMovie)
+        let charactersVC = CharactersViewController(viewModel: charactersViewModel)
+        
+        charactersVC.modalPresentationStyle = .fullScreen
+        charactersVC.modalTransitionStyle = .crossDissolve
+        present(charactersVC, animated: true)
     }
     
+    
+    
     @objc private func infoButtonTapped() {
+        
     }
+    
     
     
 }//class
+
 

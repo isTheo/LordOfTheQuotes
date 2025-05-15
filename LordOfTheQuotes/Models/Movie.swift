@@ -11,11 +11,12 @@ import Foundation
 struct Movie: Codable, Identifiable {
     let id: String
     let name: String
-    let runtimeInMinutes: Int?
-    let budgetInMillions: Double?
-    let boxOfficeRevenueInMillions: Double?
-    let academyAwardNominations: Int?
-    let academyAwardWins: Int?
+    //I'm not sure if I'm using these
+//    let runtimeInMinutes: Int?
+//    let budgetInMillions: Double?
+//    let boxOfficeRevenueInMillions: Double?
+//    let academyAwardNominations: Int?
+//    let academyAwardWins: Int?
     
     var backgroundImageName: String {
         switch id {
